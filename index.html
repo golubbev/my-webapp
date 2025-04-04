@@ -6,8 +6,46 @@
   <title>CryptoBot Wallet</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="https://cryptologos.cc/logos/bitcoin-btc-logo.png" />
+  
+  <!-- Подключение Firebase -->
   <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    // Инициализация Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyKFAVqzhMivPHD8GzuMMzlTXqISmsrJ0",
+      authDomain: "cryptobotdb.firebaseapp.com",
+      projectId: "cryptobotdb",
+      storageBucket: "cryptobotdb.firebasestorage.app",
+      messagingSenderId: "825768615352",
+      appId: "1:825768615352:web:3eaf61dff171af3c10834d"
+    };
+
+    // Инициализация Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Функция для получения данных из Firestore
+    async function getBalance(userId) {
+      const docRef = db.collection("users").doc(userId.toString());
+      const doc = await docRef.get();
+      if (doc.exists) {
+        return doc.data();
+      } else {
+        console.log("Документ не найден!");
+        return {};
+      }
+    }
+
+    // Функция для обновления данных в Firestore
+    async function updateBalance(userId, currency, amount) {
+      const docRef = db.collection("users").doc(userId.toString());
+      await docRef.update({
+        [currency]: firebase.firestore.FieldValue.increment(amount),
+      });
+    }
+  </script>
 </head>
 <body>
   <div class="app">
@@ -59,46 +97,25 @@
   </div>
 
   <script>
-    // Ваш Firebase конфиг
-    const firebaseConfig = {
-      apiKey: "AIzaSyAyKFAVqzhMivPHD8GzuMMzlTXqISmsrJ0",
-      authDomain: "cryptobotdb.firebaseapp.com",
-      projectId: "cryptobotdb",
-      storageBucket: "cryptobotdb.firebasestorage.app",
-      messagingSenderId: "825768615352",
-      appId: "1:825768615352:web:3eaf61dff171af3c10834d"
-    };
+    // Функция для получения баланса из Firebase
+    async function fetchUserBalance(userId) {
+      const balance = await getBalance(userId);
 
-    // Инициализация Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+      // Обновляем UI с данными из базы
+      document.getElementById("btcBalance").textContent = balance.btc || "0.0000";
+      document.getElementById("ethBalance").textContent = balance.eth || "0.0000";
+      document.getElementById("usdtBalance").textContent = balance.usdt || "0.00";
+      document.getElementById("tcnBalance").textContent = balance.tcn || "0.00";
 
-    // Пример добавления нового пользователя в базу
-    function addUser(userId, balance) {
-      db.collection("users").doc(userId).set({
-        balance: balance
-      })
-      .then(() => {
-        console.log("Пользователь добавлен");
-      })
-      .catch((error) => {
-        console.error("Ошибка добавления пользователя: ", error);
-      });
+      const totalBalance = (balance.btc * 60000) + (balance.eth * 3000) + (balance.usdt * 1) + (balance.tcn * 10); // Пример расчета общей суммы
+      document.getElementById("totalBalance").textContent = `$${totalBalance.toFixed(2)}`;
     }
 
-    // Пример получения баланса пользователя
-    function getUserBalance(userId) {
-      const userRef = db.collection("users").doc(userId);
-      userRef.get().then((doc) => {
-        if (doc.exists) {
-          console.log("Баланс пользователя: ", doc.data().balance);
-        } else {
-          console.log("Пользователь не найден");
-        }
-      }).catch((error) => {
-        console.error("Ошибка получения данных: ", error);
-      });
-    }
+    // Стартовые данные пользователя
+    const userId = 123456789; // Замените на актуальный user_id
+    fetchUserBalance(userId);
   </script>
+
+  <script src="script.js"></script>
 </body>
 </html>
