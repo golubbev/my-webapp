@@ -56,7 +56,8 @@
       </button>
     </header>
 
-    <div class="settings-panel" id="settingsPanel">
+    <!-- Панель настроек -->
+    <div class="settings-panel" id="settingsPanel" style="display: none;">
       <label>
         <input type="checkbox" id="themeToggle" onchange="toggleTheme()" /> Тёмная тема
       </label>
@@ -114,6 +115,23 @@
     // Стартовые данные пользователя
     const userId = 123456789; // Замените на актуальный user_id
     fetchUserBalance(userId);
+
+    // Функция для переключения темы
+    function toggleTheme() {
+      document.body.classList.toggle('dark-theme');
+    }
+
+    // Функция для изменения валюты
+    function changeCurrency() {
+      const currency = document.getElementById("currencySelector").value;
+      console.log("Изменена валюта на: " + currency);
+    }
+
+    // Функция для переключения отображения панели настроек
+    function toggleSettings() {
+      const settingsPanel = document.getElementById("settingsPanel");
+      settingsPanel.style.display = settingsPanel.style.display === "none" ? "block" : "none";
+    }
   </script>
 
   <script src="script.js"></script>

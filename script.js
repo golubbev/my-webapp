@@ -1,66 +1,34 @@
-// Фейковые данные (можно заменить на реальные API)
-const userBalances = {
-  btc: 0.003,
-  eth: 0.06,
-  usdt: 120.5,
-  tcn: 5000
-};
+// Функция для получения баланса из Firebase
+async function fetchUserBalance(userId) {
+  const balance = await getBalance(userId);
 
-const exchangeRates = {
-  usd: {
-    btc: 65000,
-    eth: 3300,
-    usdt: 1,
-    tcn: 0.05
-  },
-  rub: {
-    btc: 6300000,
-    eth: 320000,
-    usdt: 95,
-    tcn: 4.5
-  }
-};
+  // Обновляем UI с данными из базы
+  document.getElementById("btcBalance").textContent = balance.btc || "0.0000";
+  document.getElementById("ethBalance").textContent = balance.eth || "0.0000";
+  document.getElementById("usdtBalance").textContent = balance.usdt || "0.00";
+  document.getElementById("tcnBalance").textContent = balance.tcn || "0.00";
 
-let currentCurrency = "usd";
+  const totalBalance = (balance.btc * 60000) + (balance.eth * 3000) + (balance.usdt * 1) + (balance.tcn * 10); // Пример расчета общей суммы
+  document.getElementById("totalBalance").textContent = `$${totalBalance.toFixed(2)}`;
+}
 
-// ===== Темная тема =====
+// Стартовые данные пользователя
+const userId = 123456789; // Замените на актуальный user_id
+fetchUserBalance(userId);
+
+// Функция для переключения темы
 function toggleTheme() {
-  document.body.classList.toggle("dark");
+  document.body.classList.toggle('dark-theme');
 }
 
-// ===== Настройки =====
-function toggleSettings() {
-  const panel = document.getElementById("settingsPanel");
-  panel.style.display = panel.style.display === "flex" ? "none" : "flex";
-}
-
-// ===== Валюта (usd/rub) =====
+// Функция для изменения валюты
 function changeCurrency() {
-  const selector = document.getElementById("currencySelector");
-  currentCurrency = selector.value;
-  updateBalances();
+  const currency = document.getElementById("currencySelector").value;
+  console.log("Изменена валюта на: " + currency);
 }
 
-// ===== Обновление баланса =====
-function updateBalances() {
-  const rates = exchangeRates[currentCurrency];
-  const btc = userBalances.btc * rates.btc;
-  const eth = userBalances.eth * rates.eth;
-  const usdt = userBalances.usdt * rates.usdt;
-  const tcn = userBalances.tcn * rates.tcn;
-
-  const total = btc + eth + usdt + tcn;
-
-  document.getElementById("btcBalance").innerText = userBalances.btc.toFixed(4);
-  document.getElementById("ethBalance").innerText = userBalances.eth.toFixed(4);
-  document.getElementById("usdtBalance").innerText = userBalances.usdt.toFixed(2);
-  document.getElementById("tcnBalance").innerText = userBalances.tcn.toFixed(2);
-
-  const symbol = currentCurrency === "usd" ? "$" : "₽";
-  document.getElementById("totalBalance").innerText = `${symbol}${total.toFixed(2)}`;
+// Функция для переключения отображения панели настроек
+function toggleSettings() {
+  const settingsPanel = document.getElementById("settingsPanel");
+  settingsPanel.style.display = settingsPanel.style.display === "none" ? "block" : "none";
 }
-
-// ===== Инициализация =====
-window.addEventListener("DOMContentLoaded", () => {
-  updateBalances();
-});
