@@ -1,37 +1,61 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoBot</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CryptoBot Wallet</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="https://cryptologos.cc/logos/bitcoin-btc-logo.png" />
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>CryptoBot</h1>
-        </div>
-        <div class="content">
-            <div class="balance">
-                <h2>Ваш баланс:</h2>
-                <div class="currency">TCN: 0.00</div>
-                <div class="currency">BTC: 0.00</div>
-                <div class="currency">ETH: 0.00</div>
-                <div class="currency">USDT: 0.00</div>
-            </div>
+  <div class="app">
+    <header class="header">
+      <h1 class="title">CryptoBot</h1>
+      <button class="settings-btn" onclick="toggleSettings()">
+        <img src="https://cdn-icons-png.flaticon.com/512/126/126472.png" alt="Settings" />
+      </button>
+    </header>
 
-            <div class="buttons">
-                <button id="depositBtn">Пополнить</button>
-                <button id="withdrawBtn">Вывести</button>
-                <button id="sendBtn">Отправить</button>
-            </div>
-
-            <div class="webapp">
-                <button id="openWebApp">Открыть мини-приложение</button>
-            </div>
-        </div>
+    <div class="settings-panel" id="settingsPanel">
+      <label>
+        <input type="checkbox" id="themeToggle" onchange="toggleTheme()" /> Тёмная тема
+      </label>
+      <label>
+        Валюта баланса:
+        <select id="currencySelector" onchange="changeCurrency()">
+          <option value="usd">USD</option>
+          <option value="rub">RUB</option>
+        </select>
+      </label>
     </div>
 
-    <script src="script.js"></script>
+    <main>
+      <div class="balance-box">
+        <p class="balance-label">Ваш баланс:</p>
+        <h2 id="totalBalance">$0.00</h2>
+      </div>
+
+      <div class="currencies">
+        <div class="currency-card">
+          <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="avatar" alt="BTC" />
+          <span>BTC: <b id="btcBalance">0.0000</b></span>
+        </div>
+        <div class="currency-card">
+          <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="avatar" alt="ETH" />
+          <span>ETH: <b id="ethBalance">0.0000</b></span>
+        </div>
+        <div class="currency-card">
+          <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" class="avatar" alt="USDT" />
+          <span>USDT: <b id="usdtBalance">0.00</b></span>
+        </div>
+        <div class="currency-card">
+          <img src="https://cryptologos.cc/logos/binance-coin-bnb-logo.png" class="avatar" alt="TCN" />
+          <span>TCN: <b id="tcnBalance">0.00</b></span>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
