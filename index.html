@@ -6,6 +6,8 @@
   <title>CryptoBot Wallet</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="https://cryptologos.cc/logos/bitcoin-btc-logo.png" />
+  <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
   <div class="app">
@@ -56,6 +58,47 @@
     </main>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Ваш Firebase конфиг
+    const firebaseConfig = {
+      apiKey: "AIzaSyAyKFAVqzhMivPHD8GzuMMzlTXqISmsrJ0",
+      authDomain: "cryptobotdb.firebaseapp.com",
+      projectId: "cryptobotdb",
+      storageBucket: "cryptobotdb.firebasestorage.app",
+      messagingSenderId: "825768615352",
+      appId: "1:825768615352:web:3eaf61dff171af3c10834d"
+    };
+
+    // Инициализация Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Пример добавления нового пользователя в базу
+    function addUser(userId, balance) {
+      db.collection("users").doc(userId).set({
+        balance: balance
+      })
+      .then(() => {
+        console.log("Пользователь добавлен");
+      })
+      .catch((error) => {
+        console.error("Ошибка добавления пользователя: ", error);
+      });
+    }
+
+    // Пример получения баланса пользователя
+    function getUserBalance(userId) {
+      const userRef = db.collection("users").doc(userId);
+      userRef.get().then((doc) => {
+        if (doc.exists) {
+          console.log("Баланс пользователя: ", doc.data().balance);
+        } else {
+          console.log("Пользователь не найден");
+        }
+      }).catch((error) => {
+        console.error("Ошибка получения данных: ", error);
+      });
+    }
+  </script>
 </body>
 </html>
