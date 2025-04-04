@@ -1,41 +1,54 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoBot</title>
+    <title>Crypto Wallet</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>CryptoBot - Мини приложение</h1>
-        <p>Добро пожаловать в ваше крипто-приложение!</p>
-    </header>
-    
-    <main>
-        <section class="form-section">
-            <h2>Отправка криптовалюты</h2>
-            <form id="send-form">
-                <label for="amount">Сумма:</label>
-                <input type="number" id="amount" name="amount" required min="0.01" step="0.01">
-                
-                <label for="recipient">Получатель (Адрес кошелька):</label>
-                <input type="text" id="recipient" name="recipient" required>
-                
-                <button type="submit">Отправить</button>
-            </form>
-        </section>
+    <div class="main-container">
+        <div class="header">
+            <div class="header-left">
+                <h1>Crypto Wallet</h1>
+                <p>Manage your cryptocurrencies</p>
+            </div>
+            <div class="header-right">
+                <img src="your-logo.png" alt="Logo">
+            </div>
+        </div>
         
-        <section id="status">
-            <h2>Статус транзакции</h2>
-            <div id="status-message">Ожидание транзакции...</div>
-        </section>
-    </main>
-    
-    <footer>
-        <p>&copy; 2025 CryptoBot. Все права защищены.</p>
-    </footer>
-    
+        <div class="wallet">
+            <div class="balance">
+                <div class="crypto-card">
+                    <h3>Bitcoin (BTC)</h3>
+                    <p class="amount">0.00 BTC</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>Ethereum (ETH)</h3>
+                    <p class="amount">0.00 ETH</p>
+                </div>
+                <div class="crypto-card">
+                    <h3>USDT</h3>
+                    <p class="amount">0.00 USDT</p>
+                </div>
+            </div>
+            <div class="send-crypto">
+                <h3>Send Cryptocurrency</h3>
+                <form id="send-form">
+                    <input type="text" id="recipient" placeholder="Recipient Address">
+                    <input type="number" id="amount" placeholder="Amount">
+                    <select id="currency">
+                        <option value="btc">Bitcoin (BTC)</option>
+                        <option value="eth">Ethereum (ETH)</option>
+                        <option value="usdt">USDT</option>
+                    </select>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

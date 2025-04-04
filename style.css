@@ -6,66 +6,103 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #F5F5F5;
     color: #333;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-main {
-    padding: 20px;
-}
-
-h2 {
-    color: #4CAF50;
-}
-
-form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    display: block;
-}
-
-input[type="number"], input[type="text"] {
+.main-container {
     width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header-left h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+.header-left p {
+    font-size: 14px;
+    color: #666;
+}
+
+.wallet {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.balance {
+    display: flex;
+    flex-direction: column;
+}
+
+.crypto-card {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-card h3 {
+    font-size: 18px;
+    color: #444;
+}
+
+.amount {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+}
+
+.send-crypto {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 48%;
+}
+
+.send-crypto h3 {
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.send-crypto form {
+    display: flex;
+    flex-direction: column;
+}
+
+.send-crypto input, 
+.send-crypto select {
     padding: 10px;
     margin-bottom: 20px;
-    border-radius: 4px;
     border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-button {
+.send-crypto button {
+    padding: 15px;
     background-color: #4CAF50;
     color: white;
-    padding: 10px 15px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
-button:hover {
+.send-crypto button:hover {
     background-color: #45a049;
-}
-
-footer {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 14px;
-}
-
-#status-message {
-    font-size: 18px;
-    color: #f39c12;
 }
