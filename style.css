@@ -5,104 +5,84 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #F5F5F5;
-    color: #333;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
 }
 
-.main-container {
+.container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.header-left h1 {
-    font-size: 36px;
+.header h1 {
+    font-size: 32px;
     color: #333;
 }
 
-.header-left p {
-    font-size: 14px;
-    color: #666;
-}
-
-.wallet {
+.content {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .balance {
-    display: flex;
-    flex-direction: column;
-}
-
-.crypto-card {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.crypto-card h3 {
-    font-size: 18px;
-    color: #444;
-}
-
-.amount {
-    font-size: 24px;
-    font-weight: bold;
-    color: #000;
-}
-
-.send-crypto {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 48%;
-}
-
-.send-crypto h3 {
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.send-crypto form {
-    display: flex;
-    flex-direction: column;
-}
-
-.send-crypto input, 
-.send-crypto select {
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.send-crypto button {
+    background-color: #f0f0f0;
     padding: 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    border-radius: 8px;
 }
 
-.send-crypto button:hover {
-    background-color: #45a049;
+.balance h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.currency {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #5b9bd5;
+    color: white;
+}
+
+button:active {
+    background-color: #3b7bbf;
+}
+
+#openWebApp {
+    background-color: #009688;
+    color: white;
+}
+
+#openWebApp:hover {
+    background-color: #00796b;
+}
+
+.webapp {
+    text-align: center;
 }
